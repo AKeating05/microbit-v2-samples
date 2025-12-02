@@ -1,14 +1,12 @@
 #include "MicroBit.h"
-#include "samples/Tests.h"
+// testpage to flash
+extern "C" void test(MicroBit &uBit);
+static void (*force_ref)(MicroBit &uBit) __attribute__((used)) = test;
 
 MicroBit uBit;
 
-int main()
+int main() 
 {
     uBit.init();
-
-    out_of_box_experience();
-
-    microbit_panic( 999 );
+    uBit.display.print("S");
 }
-

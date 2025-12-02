@@ -248,6 +248,13 @@ if("${SOURCE_FILES}" STREQUAL "")
     message(FATAL_ERROR "${BoldRed}No user application to build, please add a main.cpp at: ${PROJECT_SOURCE_DIR}/${CODAL_APP_SOURCE_DIR}${ColourReset}")
 endif()
 
+add_executable(${CODAL_OUTPUT_NAME}.elf ${SOURCE_FILES})
+target_link_libraries(${CODAL_OUTPUT_NAME}.elf ${CODAL_DEPS})
+set_target_properties(${CODAL_OUTPUT_NAME}.elf PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}")
+
+add_custom_command(TARGET ${CODAL_OUTPUT_NAME}.elf POST_BUILD
+    COMMAND ${CMAKE_OBJCOPY} -O ihex $<TARGET_FILE:${CODAL_OUTPUT_NAME}.elf> ${CMAKE_BINARY_DIR}/${CODAL_OUTPUT_NAME}.hex)
+
 if ("${BUILD_TOOL}" STRGREATER "")
     string(COMPARE EQUAL "${BUILD_TOOL}" "YOTTA" YOTTA_BUILD)
     if (${YOTTA_BUILD})
