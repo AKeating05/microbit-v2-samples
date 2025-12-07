@@ -1,12 +1,18 @@
 #include "MicroBit.h"
-// testpage to flash
-extern "C" void test(MicroBit &uBit);
-static void (*force_ref)(MicroBit &uBit) __attribute__((used)) = test;
 
 MicroBit uBit;
+
+// user code
+extern "C" void user_main(MicroBit &uBit) __attribute__((section(".flash_user"), used, noinline));
+void user_main(MicroBit &uBit)
+{
+    uBit.display.scroll("INSIDE USER REGION");
+}
+
+
 
 int main() 
 {
     uBit.init();
-    uBit.display.print("S");
+    user_main(uBit);
 }
