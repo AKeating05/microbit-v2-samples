@@ -2,22 +2,12 @@
 
 MicroBit uBit;
 
-// user code
-extern "C" void user_main(MicroBit &uBit) __attribute__((section(".flash_user"), used, noinline));
-void user_main(MicroBit &uBit)
-{
-    
-    while(1)
-    {
-        uBit.display.scroll("RECEIVER");
-    }
-    
-}
-
-
+extern "C" void user_stub(MicroBit &uBit);
+extern "C" void init_user_abi(MicroBit &uBit);
 
 int main() 
 {
     uBit.init();
-    user_main(uBit);
+    init_user_abi(uBit);
+    user_stub(uBit);
 }
