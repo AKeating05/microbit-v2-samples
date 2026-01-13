@@ -10,10 +10,22 @@ void user_main(void)
     ABI->scroll("RECEIVER");
     while(1)
     {
-        ABI->set_pixel(0,0,255);
-        ABI->sleep(200);
-        ABI->set_pixel(0,0,0);
-        ABI->sleep(200);
+        for(int y=0; y<5; y++)
+        {
+            for(int x=0; x<5; x++)
+            {
+                ABI->set_pixel(x,y,255);
+                ABI->sleep(200);
+            }
+        }
+        for(int y=0; y<5; y++)
+        {
+            for(int x=0; x<5; x++)
+            {
+                ABI->set_pixel(x,y,0);
+                ABI->sleep(200);
+            }
+        }
     }
     
 }
