@@ -7,7 +7,6 @@ MicroBit uBit;
 extern "C" void user_main(void) __attribute__((section(".flash_user"), used, noinline));
 void user_main(void)
 {
-    ABI->scroll("RECEIVER");
     while(1)
     {
         for(int y=0; y<5; y++)
