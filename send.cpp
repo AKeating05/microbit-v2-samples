@@ -8,7 +8,7 @@ extern "C" void user_main(void) __attribute__((section(".flash_user"), used, noi
 void user_main(void)
 {
     while(1)
-    {
+    {    
         for(int y=0; y<5; y++)
         {
             for(int x=0; x<5; x++)
@@ -26,14 +26,16 @@ void user_main(void)
             }
         }
     }
-    
+
 }
+
+
+extern "C" void user_stub(MicroBit &uBit);
+extern "C" void init_user_abi(MicroBit &uBit);
 
 int main() 
 {
     uBit.init();
-    while(1)
-    {
-        uBit.display.scroll("SENDER");
-    }
+    init_user_abi(uBit);
+    user_stub(uBit);
 }
