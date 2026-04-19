@@ -3,10 +3,12 @@
 
 MicroBit uBit;
 
-// user code
+//user code running on the sender micro:bit, this region is transferred over radio
 extern "C" void user_main(void) __attribute__((section(".flash_user"), used, noinline));
 void user_main(void)
 {
+    //repeatedly turn on random display pixel on/off
+    //lines repeated to increase transfer size to 3 pages for testing
     while(1)
     {
     ABI->set_pixel(ABI->random(6),ABI->random(6),255);
